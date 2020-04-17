@@ -2,6 +2,7 @@
 .idea
 complete-node-bootcamp-master.zip
 complete-node-bootcamp-master/1-node-farm/final
+complete-node-bootcamp-master/1-node-farm/starter/node_modules
 complete-node-bootcamp-master/2-how-node-works/final
 complete-node-bootcamp-master/3-asynchronous-JS/final
 complete-node-bootcamp-master/4-natours/after-section-06
