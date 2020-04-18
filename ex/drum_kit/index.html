@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!--// kbd The Keyboard Input element(<kbd>) represents a span of inline text denoting textual user-->
+<!--    input from a keyboard, voice input, or any other entry entry device.-->
 
+<!--let dynamic = document.getElementsByClassName('key')-->
+<!--let static = document.querySelectorAll('.key')-->
 
 <div class="keys">
     <div data-key="65" class="key">
@@ -58,19 +62,26 @@
 <audio data-key="76" src="sounds/tink.wav"></audio>
 <script>
     (function () { // 按下键盘
-        window.addEventListener('keydown', playHandler)
         function playHandler(e) {
             // play music
             const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`)
             if (audio) audio.play()
             // dom style
-            const dom = document.querySelector(`div[data-key="${e.keyCode}"]`) // 不支持ie querySelector
+            const dom = document.querySelector(`div[data-key="${e.keyCode}"]`)
+            // 不支持ie querySelector
             if(dom) dom.classList.add('playing')
-            console.log(audio, dom)
         }
+        function transitionendHandler(e) {
+            if (e.propertyName === 'transform') {
+                e.currentTarget.classList.remove('playing')
+            }
+        }
+        window.addEventListener('keydown', playHandler)
+        // The transitionend event is fired when a CSS transition has completed
+        document.querySelectorAll('.key').forEach(function (key) {
+            key.addEventListener('transitionend', transitionendHandler)
+        })
     })()
-
-
 </script>
 </body>
 </html>
