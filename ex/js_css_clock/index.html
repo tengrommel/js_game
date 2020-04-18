@@ -118,15 +118,28 @@
         function setClock() {
             let data = new Date()
             let secondDeg = data.getSeconds() * 6
-            let minDeg = data.getMinutes() * 6
-            let hourDeg = data.getHours() * 30
+            let minDeg = data.getMinutes() * 6 + data.getSeconds() * 6 / 60
+            let hourDeg = data.getHours() * 30 + data.getMinutes() * 30 / 60
+
             second.style.transform = `rotate(${secondDeg}deg)`
             min.style.transform = `rotate(${minDeg}deg)`
             hour.style.transform = `rotate(${hourDeg}deg)`
         }
+
+        function timeoutHandler() {
+            setClock()
+            setTimeout(timeoutHandler, 1000)
+        }
+
+        function animationHandler() {
+            setClock()
+            window.requestAnimationFrame(animationHandler)
+        }
         setClock() // 初始化画面
         // 计时器　setInterval、setTimeout、requestAnimationFrame
-        setInterval(setClock, 1000)
+        // setInterval(setClock, 1000) // 设定间隔 持续执行很多次
+        // setTimeout(timeoutHandler, 1000) // 设定延迟一次
+        window.requestAnimationFrame(animationHandler) // 处理画面更新的setTimeout
     })()
 </script>
 
