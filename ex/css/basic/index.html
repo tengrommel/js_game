@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <title></title>
     <style type="text/css">
-        #d1{
-            color: yellow;
-            font-size: 100px;
+        [data-src] {
+            width: 200px;
+            height: 200px;
+            background: salmon;
+        }
+        [data-src="cba"]{
+            border: 10px solid aquamarine;
         }
     </style>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="d1">
-        helloworld
-    </div>
-    <div id="d2" style="color: pink; font-size: 100px">
-        helloworld2
-    </div>
-    <div id="d3">helloworld3</div>
+
+<div data-src="abc"></div>
+<div data-src="cba"></div>
 </body>
 </html>
