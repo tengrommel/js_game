@@ -13,3 +13,6 @@ Two Step process
 # DOM
 
 Basic HTML & CSS
+
+# CSS
+> Variables not support IE
