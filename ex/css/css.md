@@ -27,3 +27,19 @@
 - 最后一个子元素语法
 
     last-child    
+
+- 伪元素
+
+创建
+
+ :before
+
+ :after
+
+> Content 必须写
+
+## 过渡动画
+
+- transition
+
+## 2d 转换
