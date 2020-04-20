@@ -25,6 +25,53 @@
     fn()
     fn.call(teacher, "说", "学", "跳")
     fn.apply(teacher, ["唱", "跳"])
+    let fnb = function () {
+        console.log(this)
+        console.log("bind")
+        for (let i = 0; i< arguments.length; i++){
+            console.log(this.name + "喜欢" + arguments[i])
+        }
+    }.bind(student)
+    fnb("ssh")
+    function Man(name, age, likeName) {
+        this.name = name
+        this.age = age
+        this.like = function () {
+            console.log(this.name + "喜欢" + likeName)
+        }
+        console.log(this)
+    }
+
+    // es6 新出的规范，允许使用class创建对象
+    class Cat {
+        // 定义构造函数
+        constructor(arg, color, likeName) {
+            this.name = name
+            this.color = color
+            this.like = function () {
+                console.log(this.color + "的" + this.name + "喜欢" + likeName)
+            }
+        }
+    }
+    let cat = new Cat("波斯猫", "白色", "吃鱼")
+    cat.like()
+    console.log(cat.name)
+    let teach = function () {
+        console.log("教好学生")
+    }
+    // 原型对象
+    let teacherProperty = {
+        // like_name: "",
+        like : function () {
+            console.log(this.name + "喜欢" + this.like_name)
+        },
+        teach: function () {
+            console.log("教好学生")
+        }
+    }
+    Man.prototype = teacherProperty
+    let t1 = new Man("年", "67")
+
 </script>
 </body>
 </html>
