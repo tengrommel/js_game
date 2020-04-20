@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script type="text/javascript">
+    function Teacher(name, age, likeName) {
+        this.name = name
+        this.age = age
+        this.likeName = likeName
+    }
+    let teacherProto = {
+        like: function () {
+            console.log(this.name + "喜欢" + this.likeName)
+        },
+        teach: function () {
+            console.log("教好学生")
+        }
+    }
+    Teacher.prototype = teacherProto
+
+    console.log(teacherProto)
+    let t1 = new Teacher("年", "67", "看电影")
+</script>
+</body>
+</html>
