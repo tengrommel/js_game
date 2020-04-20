@@ -12,6 +12,9 @@
             console.log(this)
             console.log(this.name)
             console.log(this.name + "喜欢打篮球")
+            for (let i = 0; i< arguments.length; i++){
+                console.log(this.name + "喜欢" + arguments[i])
+            }
         }
     }
     let teacher = {
@@ -20,7 +23,8 @@
     let fn = student.like
     student.like()
     fn()
-    fn.call(teacher)
+    fn.call(teacher, "说", "学", "跳")
+    fn.apply(teacher, ["唱", "跳"])
 </script>
 </body>
 </html>
