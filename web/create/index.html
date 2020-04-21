@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="d1">hello1</div>
+<div class="d2">hello2</div>
+<div class="d3">hello3</div>
+
+<script type="text/javascript">
+    // 创建元素
+    let h1 = document.createElement("h1")
+    console.log([h1])
+    console.log(typeof h1)
+    h1.innerHTML = "中文"
+    let d1 = document.querySelector(".d1")
+    // 追加子元素
+    d1.appendChild(h1)
+    // 在什么前面插入元素
+    let img = document.createElement('img')
+    console.log(img)
+    img.src = "download.jpeg"
+    console.log(img)
+    // 找到被插入的父元素，body
+    let body = document.querySelector('body')
+    // 在body的d3前插入内容
+    let d3 = document.querySelector('.d3')
+    body.insertBefore(img, d3)
+    // 删除元素
+    // 1、找到被删除的父元素
+    body = document.querySelector('body')
+    // 2、找到要删除的元素
+    let d2 = document.querySelector('.d2')
+    // 3、删除，父元素.removeChild(子元素)
+    body.removeChild(d2)
+</script>
+</body>
+</html>
