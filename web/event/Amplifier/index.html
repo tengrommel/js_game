@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .amplifier{
+            width: 800px;
+            height: 300px;
+            margin: 0 auto;
+            display: flex;
+        }
+        .left{
+            width: 400px;
+            height: 300px;
+            background-image: url("picture.jpg");
+            background-size: 100% 100%;
+            position: relative;
+        }
+        .cover {
+            /*display: none;*/
+            width: 200px;
+            height: 150px;
+            background: rgba(255, 255, 0, 0.7);
+            position: absolute;
+        }
+        .right {
+            width: 400px;
+            height: 300px;
+            /*display: none;*/
+            background-image: url("picture.jpg");
+            background-size: 800px 600px;
+            background-position: 0 0;
+        }
+    </style>
+</head>
+<body>
+<div class="amplifier">
+    <div class="left">
+        <div class="cover"></div>
+    </div>
+    <div class="right"></div>
+</div>
+
+<script type="text/javascript">
+    let amplifier = document.querySelector(".amplifier")
+    let left = document.querySelector(".left")
+    let cover = document.querySelector(".cover")
+    let right = document.querySelector(".right")
+    // 移入显示遮罩
+    left.onmouseenter = function () {
+        cover.style.display = "block"
+        right.style.display = "block"
+    }
+    // 移出隐藏遮罩
+    left.onmouseleave = function () {
+        cover.style.display = "none"
+    }
+    // 监听鼠标在left元素上的移动
+    left.onmousemove = function (event) {
+        console.log(event)
+        let x = event.pageX - 100 - amplifier.offsetLeft
+        let y = event.pageY - 75 - amplifier.offsetTop
+        if (x < 0) {
+            x = 0
+        }
+        if (x > 200) {
+            x = 200
+        }
+        if (y < 0){
+            y = 0
+        }
+        if (y > 150) {
+            y = 150
+        }
+        cover.style.left = x + "px"
+        cover.style.top = y + "px"
+        right.style.backgroundPosition = (-x*2) + "px " + (-y*2) + "px"
+    }
+</script>
+</body>
+</html>
