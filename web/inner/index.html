@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="d1">
+    helllworld1
+    <h3>child1</h3>
+    <h3>child2</h3>
+    <h3>child3</h3>
+</div>
+<div class="d2">helllworld2</div>
+<div class="d3">helllworld3</div>
+
+<script type="text/javascript">
+    let d1 = document.querySelector('.d1')
+    console.log(d1.innerHTML) // 获取HTML
+    console.log(d1.innerText) // 获取里面的文本
+    // 获取包含d1的HTML代码
+    console.log(d1.outerHTML) // 把自己本身的标签写入
+</script>
+
+</body>
+</html>
