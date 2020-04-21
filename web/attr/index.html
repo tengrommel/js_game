@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="d1">
+    helloworld
+</div>
+<img id="img1">
+<script type="text/javascript">
+    let d1 = document.querySelector('#d1')
+    console.log([d1])
+    // 获取属性值
+    console.log(d1.id)
+    console.log(d1['id'])
+    console.log(d1.getAttribute('id')) // 获取属性
+    // 修改属性值
+    d1.id = "d2"
+    d1.setAttribute('id', "d4")
+    console.log(d1)
+    let img = document.querySelector('#img1')
+    img.setAttribute('src', "download.jpeg")
+</script>
+</body>
+</html>
