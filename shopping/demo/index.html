@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="username">
+<br>
+<span id="uName"></span>
+<!--vue实现双向绑定的关键-->
+<script>
+    let obj = {}
+    Object.defineProperty(obj, "userName", {
+        get: function () {
+            console.log("get init")
+        },
+        set: function (val) {
+            console.log("set in")
+            document.getElementById("uName").innerText = val
+            document.getElementById("username").innerText = val
+        }
+    })
+    document.getElementById("username").addEventListener("keyup", function (event) {
+        document.getElementById("uName").innerText = event.target.value
+    })
+</script>
+</body>
+</html>
