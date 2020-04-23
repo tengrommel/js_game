@@ -14,15 +14,15 @@ that it's out of stock.
 - v-else
 - v-show
 
-# List Rendering
+# list rendering
 
-## Problem
+## problem
 > We want our page to display our product's details. How can we iterate 
 through this array to display its data?
 
-# Event Handling 
+# event handling 
 
-## Problem
+## problem
 
 >We want to be able to hover our mouse over a variant’s color and have its variantImage 
 show up where our product image currently is.
@@ -30,9 +30,15 @@ show up where our product image currently is.
 # class & style binding
 > When this boolean is false, we shouldn't allow users to click the "Add to Cart" button. !inStock
 
-# Computed Properties
+# computed properties
 > These are properties on the Vue instance that calculate a value rather than store a value
 
-# P
+## problem
 > We want brand and product to be combined into one string. In other words, we want to display "Vue Mastery Socks" in 
 our h1 instead of just "Socks. How can we concatenate two values from our data?"
+
+# components
+> In a Vue application, we don't want all of our data, methods, computed properties, etc.
+
+# communicating events
+> 
