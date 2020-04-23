@@ -19,3 +19,11 @@ that it's out of stock.
 ## Problem
 > We want our page to display our product's details. How can we iterate 
 through this array to display its data?
+
+## Event Handling 
+
+## Problem
+
+>We want to be able to hover our mouse over a variant’s color and have its variantImage 
+show up where our product image currently is.
+
