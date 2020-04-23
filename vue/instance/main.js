@@ -58,13 +58,13 @@ Vue.component('product', {
                 {
                     variantId: 2234,
                     variantColor: 'green',
-                    variantImage: 'https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg',
+                    variantImage: 'vmSocks-green-onWhite.jpg',
                     variantQuantity: 10
                 },
                 {
                     variantId: 2235,
                     variantColor: 'blue',
-                    variantImage: 'https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg',
+                    variantImage: 'vmSocks-blue.jpg',
                     variantQuantity: 0
                 }
             ]
