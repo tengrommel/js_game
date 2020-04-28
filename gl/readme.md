@@ -31,3 +31,20 @@
     - 多平台运行
     - "Web版的OpenGL"
 
+- 使用attribute、unifrom变量
+    - 使用attribute绘制一个点
+    - attribute变量传输的是与顶点相关的数据
+    - 主要操作步骤：
+        - A、在顶点着色器中声明attribute变量
+        - B、将attribute变量赋值给JS变量
+        - C、向attribute变量传输数据
+
+- WebGL缓冲区对象
+    - WebGL提供了方便的机制，可以进行一次性向着色器传入多个顶点的数据，叫做缓冲区对象
+    - 缓冲区对象是WebGL的一块存储区，创建后才能向其中写入顶点数据
+    - 操作步骤
+        - A、创建缓冲区对象
+        - B、绑定缓冲区对象
+        - C、将数据写入缓冲区
+        - D、给缓冲区对象分配一个attribute变量
+        - E、开启attribute变量
