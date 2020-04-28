@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>矩阵</title>
+    <script src="lib.js"></script>
+</head>
+<body>
+<canvas id="web08" height="500" width="500"></canvas>
+<script>
+    let canvas = document.getElementById("web08");
+    let gl = canvas.getContext("webgl2");
+    // 顶点着色器
+    let VERTEX_SHADER = "" +
+        "attribute vec4 a_pos;" +
+        "uniform mat4 u_change;" +
+        "void main(){" +
+        "gl_Position=u_change*a_pos;" +
+        "}";
+    let FRAG_SHADER = "" +
+        "void main(){" +
+        "gl_FragColor=vec4(0.1, 0.5, 1.0, 1.0);" +
+        "}";
+    let program = initShader(gl, VERTEX_SHADER, FRAG_SHADER);
+    let dataVertices = new Float32Array([
+        0.0, 0.0,
+        0.3, 0.3,
+        0.6, 0.0
+    ]);
+    bufferInit(gl, dataVertices, "a_pos", program);
+    let Tx=0.0;
+    let Ty=0.0;
+    let Tz=0.0;
+
+    window.onkeydown = function(e) {
+        if (37===e.keyCode) {
+            Tx -= 0.01;
+        }
+        if (38===e.keyCode) {
+            Ty += 0.01;
+        }
+        if (39===e.keyCode) {
+            Tx += 0.01;
+        }
+        if (40===e.keyCode) {
+            Ty -= 0.01;
+        }
+        run();
+    }
+
+    function run() {
+        // 平移矩阵
+        let dataMatrix = new Float32Array([
+            1.0, 0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            Tx, Ty, Tz, 1.0
+        ]);
+        let u_change = gl.getUniformLocation(program, "u_change");
+        gl.uniformMatrix4fv(u_change, false, dataMatrix);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    run();
+
+</script>
+</body>
+
+</html>
