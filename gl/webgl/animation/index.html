@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <script src="lib.js"></script>
+    <script src="matrix.js"></script>
+</head>
+<body>
+<canvas id="web" height="500" width="500"></canvas>
+<script>
+    let canvas = document.getElementById("web");
+    let gl = canvas.getContext("webgl2");
+    // 顶点着色器
+    let VERTEX_SHADER = "" +
+        "attribute vec4 a_pos;" +
+        "uniform mat4 u_translate;" +
+        "uniform mat4 u_rotate;" +
+        "void main(){" +
+        "gl_Position=u_rotate*u_translate*a_pos;" +
+        "}";
+    let FRAG_SHADER = "" +
+        "void main(){" +
+        "gl_FragColor=vec4(0.1, 0.5, 1.0, 1.0);" +
+        "}";
+
+    let program = initShader(gl, VERTEX_SHADER, FRAG_SHADER);
+    let dataVertices = new Float32Array([
+        0.0, 0.0,
+        0.3, 0.3,
+        0.6, 0.0
+    ]);
+    bufferInit(gl, dataVertices, "a_pos", program);
+    let u_translate = gl.getUniformLocation(program, "u_translate");
+    let u_rotate = gl.getUniformLocation(program, "u_rotate");
+    gl.uniformMatrix4fv(u_translate, false, translate(0.3, 0.0, 0.0));
+    gl.uniformMatrix4fv(u_rotate, false, rotate(60.0));
+
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+</script>
+</body>
+</html>
