@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>缩放</title>
+    <script src="lib.js"></script>
+</head>
+<body>
+<canvas id="web08" height="500" width="500"></canvas>
+<script>
+    let canvas = document.getElementById("web08");
+    let gl = canvas.getContext("webgl2");
+    // 顶点着色器
+    let VERTEX_SHADER = "" +
+        "attribute vec4 a_pos;" +
+        "uniform float u_change;" +
+        "void main(){" +
+        "gl_Position.x=a_pos.x;" +
+        "gl_Position.y=a_pos.y;" +
+        "gl_Position.z=a_pos.z;" +
+        "gl_Position.w=u_change;" +
+        "}";
+
+    let FRAG_SHADER = "" +
+        "void main(){" +
+        "gl_FragColor=vec4(0.1, 0.5, 1.0, 1.0);" +
+        "}";
+
+    let program = initShader(gl, VERTEX_SHADER, FRAG_SHADER);
+    let dataVertices = new Float32Array([
+        -0.2, -0.2,
+        0.0, 0.2,
+        0.2, -0.2
+    ]);
+    bufferInit(gl, dataVertices, "a_pos", program);
+    let u_change = gl.getUniformLocation(program, "u_change");
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    let w = 1.0;
+    window.onkeydown = function (e) {
+        console.log(e)
+        if (38 === e.keyCode) {
+            w-=0.01;
+        }
+        if (40 === e.keyCode) {
+            w+=0.01;
+        }
+        run();
+    }
+
+    function run() {
+        console.info("begin", w)
+        gl.uniform1f(u_change, w);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    run();
+</script>
+</body>
+
+</html>
