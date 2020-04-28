@@ -121,6 +121,6 @@ varying变量的作用时从顶点着色器向片元着色器中传输数据
 - ５、绑定纹理对象 bindTexture()
 - ６、配置纹理参数 texParameteri()
 - ７、将纹理图像分配给纹理对象 texImage2D()
-- ８、将纹理单元传递给片元着色器 uniformli()
+- ８、将纹理单元传递给片元着色器 uniform1i()
 
 
