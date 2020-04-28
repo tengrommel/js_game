@@ -2,50 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>offset</title>
+    <title>varying变量</title>
     <script src="lib.js"></script>
 </head>
 <body>
-<canvas id="web" height="500" width="500"></canvas>
+<canvas id="web" height="600" width="600"></canvas>
 <script>
     let canvas = document.getElementById("web");
     let gl = canvas.getContext("webgl2");
     // 顶点着色器
     let VERTEX_SHADER = "" +
         "attribute vec4 a_pos;" +
-        "attribute float a_size;" +
+        "attribute vec4 a_color;" +
+        "varying vec4 v_color;" +
         "void main(){" +
         "gl_Position=a_pos;" +
-        "gl_PointSize=a_size;" +
+        "v_color=a_color;" +
+        "gl_PointSize=20.0;" +
         "}";
 
     let FRAG_SHADER = "" +
+        "precision lowp float;" +
+        "varying vec4 v_color;" +
         "void main(){" +
-        "gl_FragColor=vec4(0.1, 0.5, 1.0, 1.0);" +
+        "gl_FragColor=v_color;" +
         "}";
 
     let program = initShader(gl, VERTEX_SHADER, FRAG_SHADER);
     let dataVertices = new Float32Array([
-        0.0, 0.0, 30.0,
-        0.5, 0.5, 40.0,
-        -0.5, -0.5, 20.0,
+        0.0, 0.0, 1.0, 0.0, 0.0,
+        -0.5, 0.6, 0.0, 1.0, 0.0,
+        0.5, 0.5, 0.0, 0.0, 1.0
     ]);
-
     let FSIZE = dataVertices.BYTES_PER_ELEMENT;
     let buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, dataVertices, gl.STATIC_DRAW);
 
     let a_pos = gl.getAttribLocation(program, "a_pos");
-    let a_size = gl.getAttribLocation(program, "a_size");
+    let a_color = gl.getAttribLocation(program, "a_color");
 
-    gl.vertexAttribPointer(a_pos, 2, gl.FLOAT, false, FSIZE*3, 0);
-    gl.vertexAttribPointer(a_size, 1, gl.FLOAT, false, FSIZE*3, FSIZE*2);
+    gl.vertexAttribPointer(a_pos, 2, gl.FLOAT, false, FSIZE*5, 0);
+    gl.vertexAttribPointer(a_color, 3, gl.FLOAT, false, FSIZE*5, FSIZE*2);
 
     gl.enableVertexAttribArray(a_pos);
-    gl.enableVertexAttribArray(a_size);
+    gl.enableVertexAttribArray(a_color);
+
     gl.drawArrays(gl.POINTS, 0, 3);
 </script>
-
 </body>
 </html>
