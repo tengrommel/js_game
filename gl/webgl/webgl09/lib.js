@@ -21,7 +21,7 @@ function initShader(gl, vertex_shader, frag_shader) {
 function bufferInit(gl, data_vertices, a_pos_string, program) {
     let buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, dataVertices, gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, data_vertices, gl.STATIC_DRAW);
     let a_pos = gl.getAttribLocation(program, a_pos_string);
     gl.vertexAttribPointer(a_pos, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(a_pos);
