@@ -28,33 +28,50 @@
         0.6, 0.0
     ]);
     bufferInit(gl, dataVertices, "a_pos", program);
-    let Tx=0.0;
-    let Ty=0.0;
-    let Tz=0.0;
+    // let Tx=1.0;
+    // let Ty=1.0;
+    // let Tz=1.0;
+    let angle = 0.0;
 
     window.onkeydown = function(e) {
-        if (37===e.keyCode) {
-            Tx -= 0.01;
-        }
+        // if (37===e.keyCode) {
+        //     Tx -= 0.01;
+        // }
         if (38===e.keyCode) {
-            Ty += 0.01;
+            angle += 1.0;
         }
-        if (39===e.keyCode) {
-            Tx += 0.01;
-        }
+        // if (39===e.keyCode) {
+        //     Tx += 0.01;
+        // }
         if (40===e.keyCode) {
-            Ty -= 0.01;
+            angle -= 1.0;
         }
         run();
     }
 
     function run() {
-        // 平移矩阵
+        // // 平移矩阵
+        // let dataMatrix = new Float32Array([
+        //     1.0, 0.0, 0.0, 0.0,
+        //     0.0, 1.0, 0.0, 0.0,
+        //     0.0, 0.0, 1.0, 0.0,
+        //     Tx, Ty, Tz, 1.0
+        // ]);
+        // // 缩放矩阵
+        // let dataMatrix = new Float32Array([
+        //     Tx, 0.0, 0.0, 0.0,
+        //     0.0, Ty, 0.0, 0.0,
+        //     0.0, 0.0, Tz, 0.0,
+        //     0.0, 0.0, 0.0, 1.0
+        // ]);
+        let cosB = Math.sin(Math.PI*angle/180.0);
+        let sinB = Math.cos(Math.PI*angle/180.0);
+
         let dataMatrix = new Float32Array([
-            1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
+            cosB, sinB, 0.0, 0.0,
+            -sinB, cosB, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
-            Tx, Ty, Tz, 1.0
+            0.0, 0.0, 0.0, 1.0
         ]);
         let u_change = gl.getUniformLocation(program, "u_change");
         gl.uniformMatrix4fv(u_change, false, dataMatrix);
