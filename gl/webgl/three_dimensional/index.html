@@ -17,8 +17,9 @@
         "attribute vec4 a_color;" +
         "varying vec4 v_color;" +
         "uniform mat4 u_ViewMatrix;" +
+        "uniform mat4 u_ModelMatrix;" +
         "void main(){" +
-        "gl_Position=u_ViewMatrix*a_pos;" +
+        "gl_Position=u_ViewMatrix*u_ModelMatrix*a_pos;" +
         "v_color=a_color;" +
         "}";
 
@@ -57,25 +58,30 @@
     gl.enableVertexAttribArray(a_color);
 
     let u_viewMatrix = gl.getUniformLocation(program, "u_ViewMatrix");
+    let u_modelMatrix = gl.getUniformLocation(program, "u_ModelMatrix");
     let x = 0.2;
     let y = 0.25;
     let z = 0.25;
+    let angle = 0.0;
 
     window.onkeydown=function (e) {
-        if (e.keyCode===39) {
-            x+=0.01;
+        if (e.keyCode===38) {
+            angle+=10.0;
         }
-        if (e.keyCode===37) {
-            x-=0.01;
+        if (e.keyCode===40) {
+            angle-=10.0;
         }
         run();
     }
 
     function run() {
         let viewMatrix = new Matrix4();
+        let modelMatrix = new Matrix4();
         viewMatrix.setLookAt(x, y, z, 0.0, 0.0, 0.0,  0.0, 1.0, 0.0);
+        modelMatrix.setRotate(angle,0,1,0);
 
         gl.uniformMatrix4fv(u_viewMatrix, false, viewMatrix.elements);
+        gl.uniformMatrix4fv(u_modelMatrix, false, modelMatrix.elements);
         gl.drawArrays(gl.TRIANGLES, 0, 9);
     }
     run();
