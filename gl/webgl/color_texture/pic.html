@@ -15,10 +15,10 @@
     let VERTEX_SHADER = "" +
         "attribute vec4 a_pos;" +
         "attribute vec2 a_TexCoord;" +
-        "varying vec2 v_TextCoord;" +
+        "varying vec2 v_TexCoord;" +
         "void main(){" +
         "gl_Position=a_pos;" +
-        "v_TexCoord=a_TextCoord;" +
+        "v_TexCoord=a_TexCoord;" +
         "}";
 
     let FRAG_SHADER = "" +
@@ -42,11 +42,12 @@
     gl.bufferData(gl.ARRAY_BUFFER, dataVertices, gl.STATIC_DRAW);
 
     let FSIZE = dataVertices.BYTES_PER_ELEMENT;
+
     let a_pos = gl.getAttribLocation(program, "a_pos");
     gl.vertexAttribPointer(a_pos, 2, gl.FLOAT, false, FSIZE * 4, 0);
 
     let a_TextCoord = gl.getAttribLocation(program, "a_TexCoord");
-    gl.vertexAttribPointer(a_TextCoord, 2, gl.FLOAT, false, FSIZE * 4, FSIZE *2);
+    gl.vertexAttribPointer(a_TextCoord, 2, gl.FLOAT, false, FSIZE * 4, FSIZE * 2);
 
     gl.enableVertexAttribArray(a_pos);
     gl.enableVertexAttribArray(a_TextCoord);
@@ -59,6 +60,7 @@
             loadTexture(gl, texture, u_Sampler, image);
         };
         image.src = "images.jpeg";
+        console.log(image);
         return true;
     }
 
@@ -69,7 +71,7 @@
         gl.texParameterf(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
         gl.uniform1i(u_Sampler, 0);
-        gl.drawArrays(gl.TRIANGLE_STRIP, -1, 4);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     }
 
     initTextures(gl);
