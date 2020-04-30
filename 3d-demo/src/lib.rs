@@ -11,6 +11,7 @@ mod gl_setup;
 mod shaders;
 mod programs;
 mod common_funcs;
+mod constants;
 
 #[wasm_bindgen]
 extern "C" {
@@ -28,6 +29,7 @@ pub struct DougsClient {
     gl: GL,
     program_color_2d: programs::color_2d::Color2D,
     program_color_2d_gradient: programs::color_2d_gradient::Color2DGradient,
+    program_graph_3d: programs::graph_3d::Graph3D,
 }
 
 #[wasm_bindgen]
@@ -39,6 +41,7 @@ impl DougsClient {
         Self {
             program_color_2d: programs::color_2d::Color2D::new(&gl),
             program_color_2d_gradient: programs::color_2d_gradient::Color2DGradient::new(&gl),
+            program_graph_3d: programs::graph_3d::Graph3D::new(&gl),
             gl,
         }
     }
@@ -62,14 +65,26 @@ impl DougsClient {
         //     curr_state.canvas_width,
         // );
 
-        self.program_color_2d_gradient.render(
+        // self.program_color_2d_gradient.render(
+        //     &self.gl,
+        //     curr_state.control_bottom + 20.,
+        //     curr_state.control_top - 20.,
+        //     curr_state.control_left + 20.,
+        //     curr_state.control_right - 20.,
+        //     curr_state.canvas_height,
+        //     curr_state.canvas_width,
+        // );
+        self.program_graph_3d.render(
             &self.gl,
-            curr_state.control_bottom + 20.,
-            curr_state.control_top - 20.,
-            curr_state.control_left + 20.,
-            curr_state.control_right - 20.,
+            curr_state.control_bottom,
+            curr_state.control_top,
+            curr_state.control_left,
+            curr_state.control_right,
             curr_state.canvas_height,
             curr_state.canvas_width,
+            curr_state.rotation_x_axis,
+            curr_state.rotation_y_axis,
+            &common_funcs::get_updated_3d_y_values(curr_state.time),
         );
 
     }
