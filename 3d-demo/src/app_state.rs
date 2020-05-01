@@ -50,7 +50,7 @@ pub struct AppState {
 impl AppState {
     fn new() -> Self {
         Self {
-            canvas_height: 0.,
+            canvas_height: 0., 
             canvas_width: 0.,
             control_bottom: 0.,
             control_top: 0.,

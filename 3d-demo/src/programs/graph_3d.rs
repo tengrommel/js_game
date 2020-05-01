@@ -55,7 +55,8 @@ impl Graph3D {
             u_normals_rotation: gl.get_uniform_location(&program, "uNormalsRotation").unwrap(),
             u_opacity: gl.get_uniform_location(&program, "uOpacity").unwrap(),
             u_projection: gl.get_uniform_location(&program, "uProjection").unwrap(),
-            program,
+            program: program,
+
             indices_buffer: buffer_indices,
             index_count: indices_array.length() as i32,
             normals_buffer: gl.create_buffer().ok_or("failed normals create buffer").unwrap(),

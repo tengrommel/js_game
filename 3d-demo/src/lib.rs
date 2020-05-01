@@ -7,11 +7,11 @@ use web_sys::WebGlRenderingContext as GL;
 extern crate lazy_static;
 
 mod app_state;
-mod gl_setup;
-mod shaders;
-mod programs;
 mod common_funcs;
 mod constants;
+mod gl_setup;
+mod programs;
+mod shaders;
 
 #[wasm_bindgen]
 extern "C" {
@@ -20,16 +20,11 @@ extern "C" {
 }
 
 #[wasm_bindgen]
-pub fn say_hello_from_rust() {
-    log("Howdy!... from Rust");
-}
-
-#[wasm_bindgen]
 pub struct DougsClient {
-    gl: GL,
-    program_color_2d: programs::color_2d::Color2D,
-    program_color_2d_gradient: programs::color_2d_gradient::Color2DGradient,
-    program_graph_3d: programs::graph_3d::Graph3D,
+    gl: WebGlRenderingContext,
+    _program_color_2d: programs::Color2D,
+    _program_color_2d_gradient: programs::Color2DGradient,
+    program_graph_3d: programs::Graph3D,
 }
 
 #[wasm_bindgen]
@@ -38,13 +33,15 @@ impl DougsClient {
     pub fn new() -> Self {
         console_error_panic_hook::set_once();
         let gl = gl_setup::initialize_webgl_context().unwrap();
+
         Self {
-            program_color_2d: programs::color_2d::Color2D::new(&gl),
-            program_color_2d_gradient: programs::color_2d_gradient::Color2DGradient::new(&gl),
-            program_graph_3d: programs::graph_3d::Graph3D::new(&gl),
-            gl,
+            _program_color_2d: programs::Color2D::new(&gl),
+            _program_color_2d_gradient: programs::Color2DGradient::new(&gl),
+            program_graph_3d: programs::Graph3D::new(&gl),
+            gl: gl,
         }
     }
+
     pub fn update(&mut self, time: f32, height: f32, width: f32) -> Result<(), JsValue> {
         app_state::update_dynamic_data(time, height, width);
         Ok(())
@@ -74,6 +71,7 @@ impl DougsClient {
         //     curr_state.canvas_height,
         //     curr_state.canvas_width,
         // );
+
         self.program_graph_3d.render(
             &self.gl,
             curr_state.control_bottom,
@@ -86,6 +84,5 @@ impl DougsClient {
             curr_state.rotation_y_axis,
             &common_funcs::get_updated_3d_y_values(curr_state.time),
         );
-
     }
 }

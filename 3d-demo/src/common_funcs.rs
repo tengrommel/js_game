@@ -14,34 +14,34 @@ pub fn get_grid_normals(n: usize, y_vals: &Vec<f32>) -> Vec<f32> {
             let y_val_index_a = z * points_per_row + x;
             let return_var_start_index = 3 * y_val_index_a;
 
-            if z == n || x == n {
-                return_var[return_var_start_index + 1] = 1.; //default
-            } else {
-                let y_val_index_b = y_val_index_a + points_per_row;
-                let y_val_index_c = y_val_index_a + 1;
-
-                let x_val_1 = square_size * x as f32;
-                let x_val_2 = x_val_1 + square_size;
-
-                let z_val_1 = square_size * z as f32;
-                let z_val_2 = z_val_1 + square_size;
-
-                let normals = get_normal_vec(
-                    x_val_1,
-                    y_vals[y_val_index_a],
-                    z_val_1,
-                    x_val_1,
-                    y_vals[y_val_index_b],
-                    z_val_2,
-                    x_val_2,
-                    y_vals[y_val_index_c],
-                    z_val_2,
-                );
-
-                return_var[return_var_start_index + 0] = normals.0;
-                return_var[return_var_start_index + 1] = normals.1;
-                return_var[return_var_start_index + 2] = normals.2;
-            }
+            // if z == n || x == n {
+            //     return_var[return_var_start_index + 1] = 1.; //default
+            // } else {
+            //     let y_val_index_b = y_val_index_a + points_per_row;
+            //     let y_val_index_c = y_val_index_a + 1;
+            //
+            //     let x_val_1 = square_size * x as f32;
+            //     let x_val_2 = x_val_1 + square_size;
+            //
+            //     let z_val_1 = square_size * z as f32;
+            //     let z_val_2 = z_val_1 + square_size;
+            //
+            //     let normals = get_normal_vec(
+            //         x_val_1,
+            //         y_vals[y_val_index_a],
+            //         z_val_1,
+            //         x_val_1,
+            //         y_vals[y_val_index_b],
+            //         z_val_2,
+            //         x_val_2,
+            //         y_vals[y_val_index_c],
+            //         z_val_2,
+            //     );
+            //
+            //     return_var[return_var_start_index + 0] = normals.0;
+            //     return_var[return_var_start_index + 1] = normals.1;
+            //     return_var[return_var_start_index + 2] = normals.2;
+            // }
         }
     }
 
@@ -267,10 +267,10 @@ fn compile_shader(
         .ok_or_else(|| String::from("Error creating shader"))?;
     gl.shader_source(&shader, source);
     gl.compile_shader(&shader);
-
+    
     if gl.get_shader_parameter(&shader, WebGlRenderingContext::COMPILE_STATUS)
         .as_bool()
-        .unwrap_or(false)
+        .unwrap_or(false) 
     {
         Ok(shader)
     } else {
