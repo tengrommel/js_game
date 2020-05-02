@@ -62,3 +62,24 @@
  * *Print this variable to the console
  * NOTE: variable "myObject" will NOT reassigned in the future
  */
+
+// const myObject = {};
+// console.log(myObject);
+
+let x = 10;
+const y = true;
+const myObject = {
+    a: x,
+    b: y,
+};
+console.log(myObject);
+
+x = 20;
+
+let anotherObject = {
+    newA: x,
+    b: y
+}
+
+console.log(anotherObject);
+console.log(myObject);
